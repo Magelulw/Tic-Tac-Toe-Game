@@ -3,11 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@600;700;800;900&family=Tilt+Neon&family=Young+Serif&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
 <body>
-    <section class="game">
+
+    <section class="gameTitle">
+        <h1>Tic Tac Toe Game</h1>
+    </section>
+
+
+    <section class="playerSection">
+
+
+        <div class="player1Div">
+
+            <h3 class="player1Heading">Player1</h3>
+        
+            <div class="displayGrid">
+                <button class="player1">Human</button>
+                <button class="bot1">AI</button>
+            </div>
+
+        </div>
+
+
+        <div class="player2Div">
+
+            <h3 class="player2Heading">Player2</h3>
+
+            <div class="displayGrid">
+                <button class="player2">Human</button>
+                <button class="Bot2">AI</button>
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+    
+    <section class="startTheGameSection">
+
+        <button class="startGame">Start</button>
+        
+    </section>
+
+
+
+    <section class="game hidden">
         <div class="gameSection">
             <div class="gameCell1 CellSize"></div>
             <div class="gameCell2 CellSize"></div>
@@ -21,22 +67,8 @@
         </div>
     </section>
 
-    <section class="playerSection">
-
-        <div class="player1">
-            <label for="player1">Player1:</label>
-            <input name="player1" type="text" placeholder="write your name">
-        </div>
-
-    
-        <div class="player2">
-            <label for="player2">Player1:</label>
-            <input name="player2" type="text" placeholder="write your name">
-        </div>
 
 
-
-    </section>
 </body>
 <script src="./main.js"></script>
 </html>

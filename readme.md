@@ -1,0 +1,1 @@
+dont use much global codes

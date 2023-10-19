@@ -8,7 +8,22 @@ body{
     width: 100%;
     height: 100vh;
 
+
+
 }
+
+/* =============== */
+/* !game Title */
+/* =============== */
+
+.gameTitle{
+    text-align: center;
+
+    margin: 2rem 0 3rem 0;
+
+    font-size: 2rem;
+}
+
 
 /* =============== */
 /* !game section */
@@ -22,6 +37,7 @@ body{
 
     height: 70%;
     width: 100%;
+
 }
 
 
@@ -29,31 +45,54 @@ body{
     height:36rem;
     width:36rem;
 
-    border: 3px solid black;
-
     display: grid;
-    grid-template-columns: repeat(3fr, 3);
+    grid-template-columns: repeat(3, 1fr);
 }
 
 
-.fieldSize{
+.CellSize{
     width:12rem;
     height:12rem;
 
-    border: 2px solid black;
+    border: 1px solid black;
 }
 
-/*=================== */
-/* !player section */
-/* ================== */
+/*===================
+=====================*/
+/* !player section   */
+/* ==================
+===================== */
 
 
 .playerSection{
     display: flex;
     justify-content: center;
 
+    font-family: 'Tilt Neon', sans-serif;
+    font-weight: bold;
+
 }
 
-.player2{
-    margin-left:4rem;
+
+/*=========================== */
+/* !Start the Game section */
+/* ==========================*/
+
+
+
+.startGame{
+    display: grid;
+    margin:0 auto;
+
+    margin-top:2rem;
+
+    text-align: center;
+    align-items: center;
+    
+    width: 7rem;
+    height:2rem;
+}
+
+.hidden{
+    display: none;
 }
