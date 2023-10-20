@@ -8,7 +8,8 @@ body{
     width: 100%;
     height: 100vh;
 
-
+    background-color: #474554;
+    
 
 }
 
@@ -21,7 +22,9 @@ body{
 
     margin: 2rem 0 3rem 0;
 
-    font-size: 2rem;
+    font-size: 2.5rem;
+    font-family: 'Tilt Neon', sans-serif;
+
 }
 
 
@@ -70,13 +73,45 @@ body{
 
     font-family: 'Tilt Neon', sans-serif;
     font-weight: bold;
+}
+
+.playerSection h3{
+    font-size: 2.3rem;
+
+    margin-bottom:4rem;
+}
+
+.player2Div{
+    margin-left:15rem;
+}
+
+.centerBtn{
+    text-align: center;
+}
+
+.centerBtn button{
+    width:6rem;
+    height:2rem;
+
+    margin-top:5px;
+}
+/* ===========================  */
+/* ?        Buttons */
+/* ========================== */
+
+.player1Btn{
 
 }
 
 
-/*=========================== */
+
+
+
+/*++++++++++++++++++++++++++
+=========================== */
 /* !Start the Game section */
-/* ==========================*/
+/* ==========================
++++++++++++++++++++++++++++++*/
 
 
 
