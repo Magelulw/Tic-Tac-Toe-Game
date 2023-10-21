@@ -1,3 +1,13 @@
+:root{
+
+    --header-clr-1:#FFBE6B;
+    --header-clr-2:#BC7184;
+
+    --btn-Hover-clr-1:#F08F7B;
+
+}
+
+
 *,::after,::before{
     padding:0;
     margin:0;
@@ -22,9 +32,10 @@ body{
 
     margin: 2rem 0 3rem 0;
 
-    font-size: 2.5rem;
+    font-size: 3.8rem;
     font-family: 'Tilt Neon', sans-serif;
 
+    color:var(--header-clr-2);
 }
 
 
@@ -62,7 +73,7 @@ body{
 
 /*===================
 =====================*/
-/* !player section   */
+/* !select player section   */
 /* ==================
 ===================== */
 
@@ -79,6 +90,9 @@ body{
     font-size: 2.3rem;
 
     margin-bottom:4rem;
+
+    color:var(--header-clr-1);
+    
 }
 
 .player2Div{
@@ -99,8 +113,20 @@ body{
 /* ?        Buttons */
 /* ========================== */
 
-.player1Btn{
+.playerSection button{
+    border-radius: 4px;
+    border:none;
+}
 
+.buttonHover:hover{
+    background-color:var(--btn-Hover-clr-1);
+
+    border-radius: 6px;
+
+    font-weight: bold;
+    color:white;
+
+    cursor: pointer;
 }
 
 
@@ -115,7 +141,7 @@ body{
 
 
 
-.startGame{
+.startGameBtn{
     display: grid;
     margin:0 auto;
 
@@ -126,8 +152,35 @@ body{
     
     width: 7rem;
     height:2rem;
+
+    border:none;
+    border-radius: 4px;
 }
+
+.startGameBtn:hover{
+
+    cursor: pointer;
+    color:white;
+
+    background-color: #FFBE6B;
+    font-weight: bold;
+}
+
+
 
 .hidden{
     display: none;
+}
+
+
+
+
+
+
+
+.cells{
+    width: 5rem;
+    height:5rem;
+
+    border:2px solid black;
 }

@@ -1,0 +1,10 @@
+.cells{
+    width: 5rem;
+    height:5rem;
+
+    border:2px solid black;
+}
+
+body{
+    background-color:#474554 ;
+}
