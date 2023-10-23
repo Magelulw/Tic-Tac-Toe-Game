@@ -87,10 +87,18 @@ body{
 .playerSection{
     display: flex;
     justify-content: center;
+    
+    
 
     font-family: 'Tilt Neon', sans-serif;
     font-weight: bold;
+    
 }
+
+.centerDiv{
+    margin-top:8rem;
+}
+
 
 .playerSection h3{
     font-size: 2.3rem;
@@ -151,13 +159,13 @@ body{
     display: grid;
     margin:0 auto;
 
-    margin-top:2rem;
+    margin-top:5rem;
 
     text-align: center;
     align-items: center;
     
-    width: 7rem;
-    height:2rem;
+    width: 10rem;
+    height:2.5rem;
 
     border:none;
     border-radius: 4px;

@@ -3,11 +3,12 @@ function gameModule(){
     function startGameBtn(){
         const startGameBtn = document.querySelector(".startGameBtn")
         const selectSection = document.querySelector(".selectSection")
-        const game = document.querySelector(".game")
+        const gameSection = document.querySelector(".gameSection")
     
         startGameBtn.addEventListener("click", function(){
             selectSection.classList.add("hidden")
-            game.classList.remove("hidden")
+            gameSection.classList.remove("hidden")
+            
 
             addGameField()
         })
