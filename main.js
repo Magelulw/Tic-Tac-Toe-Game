@@ -24,6 +24,9 @@ function gameModule(){
 
     }
 
+    
+
+
     function addGameField(){
         const gameFieldSection = document.querySelector(".gameSection");
 

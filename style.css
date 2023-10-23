@@ -62,6 +62,8 @@ body{
 
     display: grid;
 
+    background-color:#F2ECFF;
+
 
     grid-template-columns: repeat(3, 1fr);
 
