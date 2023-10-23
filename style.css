@@ -49,18 +49,22 @@ body{
     justify-content: center;
     align-items: center;
 
-    height: 70%;
+    height: 100%;
     width: 100%;
 
 }
 
 
 .gameSection{
+
     height:36rem;
     width:36rem;
 
     display: grid;
+
+
     grid-template-columns: repeat(3, 1fr);
+
 }
 
 
@@ -170,17 +174,4 @@ body{
 
 .hidden{
     display: none;
-}
-
-
-
-
-
-
-
-.cells{
-    width: 5rem;
-    height:5rem;
-
-    border:2px solid black;
 }
