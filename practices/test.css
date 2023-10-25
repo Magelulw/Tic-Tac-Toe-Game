@@ -1,10 +1,209 @@
-.cells{
-    width: 5rem;
-    height:5rem;
+:root{
 
-    border:2px solid black;
+    --header-clr-1:#FFBE6B;
+    --header-clr-2:#BC7184;
+
+    --btn-Hover-clr-1:#F08F7B;
+
+}
+
+
+*,::after,::before{
+    padding:0;
+    margin:0;
+    box-sizing: border-box;
 }
 
 body{
-    background-color:#474554 ;
+    width: 100%;
+    height: 100vh;
+
+    background-color: #474554;
+    
+
+}
+
+/* =============== */
+/* !game Title */
+/* =============== */
+
+.gameTitle{
+    text-align: center;
+
+    margin: 2rem 0 3rem 0;
+
+    font-size: 3.8rem;
+    font-family: 'Tilt Neon', sans-serif;
+
+    color:var(--header-clr-2);
+}
+
+
+/* =============== */
+/* !game section */
+/* =============== */
+
+
+.game{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 100%;
+    width: 100%;
+
+}
+
+
+.gameSection{
+
+    height:36rem;
+    width:36rem;
+
+    display: grid;
+
+    background-color:#F2ECFF;
+
+
+    grid-template-columns: repeat(3, 1fr);
+
+}
+
+
+.CellSize{
+    width:12rem;
+    height:12rem;
+
+    border: 1px solid black;
+}
+
+/*===================
+=====================*/
+/* !select player section   */
+/* ==================
+===================== */
+
+
+.playerSection{
+    display: flex;
+    justify-content: center;
+    
+    
+
+    font-family: 'Tilt Neon', sans-serif;
+    font-weight: bold;
+    
+}
+
+.centerDiv{
+    margin-top:8rem;
+}
+
+
+.playerSection h3{
+    font-size: 2.3rem;
+
+    margin-bottom:4rem;
+
+    color:var(--header-clr-1);
+    
+}
+
+.player2Div{
+    margin-left:15rem;
+}
+
+.centerBtn{
+    text-align: center;
+}
+
+.centerBtn button{
+    width:6rem;
+    height:2rem;
+
+    margin-top:5px;
+}
+/* ===========================  */
+/* ?        Buttons */
+/* ========================== */
+
+.playerSection button{
+    border-radius: 4px;
+    border:none;
+}
+
+.buttonHover:hover{
+    background-color:var(--btn-Hover-clr-1);
+
+    border-radius: 6px;
+
+    font-weight: bold;
+    color:white;
+
+    cursor: pointer;
+}
+
+
+
+
+
+/*++++++++++++++++++++++++++
+=========================== */
+/* !Start the Game section */
+/* ==========================
++++++++++++++++++++++++++++++*/
+
+
+
+.startGameBtn{
+    display: grid;
+    margin:0 auto;
+
+    margin-top:5rem;
+
+    text-align: center;
+    align-items: center;
+    
+    width: 10rem;
+    height:2.5rem;
+
+    border:none;
+    border-radius: 4px;
+}
+
+.startGameBtn:hover{
+
+    cursor: pointer;
+    color:white;
+
+    background-color: #FFBE6B;
+    font-weight: bold;
+}
+
+
+
+.hidden{
+    display: none;
+}
+
+
+.selectedChoiceBtn{
+    font-weight: bold;
+    background-color: #F08F7B;
+    color:white;
+}
+
+
+.zeroSign::before{
+    content:"O";
+    height: 100%;
+    width:100%;
+
+
+    display:flex;
+    justify-content: center;
+    align-items: center;
+
+
+    color:black;
 }
