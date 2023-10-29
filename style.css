@@ -42,7 +42,12 @@ body{
 /* =============== */
 /* !game section */
 /* =============== */
-
+.playerText{
+    text-align: center;
+    font-size: 4rem;
+    margin: 3rem 0;
+    color:var(--header-clr-1)
+}
 
 .game{
     display: flex;
@@ -196,6 +201,21 @@ body{
 
 .zeroSign::before{
     content:"O";
+    height: 100%;
+    width:100%;
+
+
+    display:flex;
+    justify-content: center;
+    align-items: center;
+
+
+    color:black;
+}
+
+
+.crossSign::before{
+    content:"X";
     height: 100%;
     width:100%;
 

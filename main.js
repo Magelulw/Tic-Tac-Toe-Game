@@ -1,14 +1,18 @@
 function gameModule(){
 
+    let currentPlayer = 0;
+
     function startGameBtn(){
         const startGameBtn = document.querySelector(".startGameBtn")
         const selectSection = document.querySelector(".selectSection")
         const gameSection = document.querySelector(".gameSection")
+        const playerText = document.querySelector(".playerText")
+
     
         startGameBtn.addEventListener("click", function(){
             selectSection.classList.add("hidden")
             gameSection.classList.remove("hidden")
-            
+            playerText.classList.remove("hidden")
 
             addGameField()
         })
@@ -17,6 +21,7 @@ function gameModule(){
     function choosePlayer(){
         let player1 = "";
         let player2 = "";
+
 
 
         const choosePlayerBtn = document.querySelectorAll(".buttonHover")
@@ -63,25 +68,20 @@ function gameModule(){
                             return "there is something wrong"
                 }
             })
+            
         })
 
-        chooseSign(player1,player2)
     }
 
-    function chooseSign(player1,player2){
-        let gameTurn = 0;
-        
-        switch(gameTurn){
-            case gameTurn % 2 == 0:
+    function playerTurn() {
+        const playerText = document.querySelector(".playerText");
 
+        if (currentPlayer === 0) {
+            playerText.textContent = "Player 1's turn";
+        } else if (currentPlayer === 1) {
+            playerText.textContent = "Player 2's turn";
         }
-
-
-
     }
-
-
-    
 
 
     function addGameField(){
@@ -90,35 +90,29 @@ function gameModule(){
     
         for(let i = 1; i <= 9; i++){
             let newDiv = document.createElement("div")
-            
             newDiv.setAttribute("gameCell",i)
             newDiv.classList.add("CellSize")
             gameFieldSection.appendChild(newDiv)
-    
+
+            newDiv.addEventListener("click",() =>{
+                if(!newDiv.classList.contains("zerosSign") && !newDiv.classList.contains("plusSign")){
+                    if(currentPlayer === 0){
+                        newDiv.classList.add("crossSign")
+                    }else if(currentPlayer === 1){
+                        newDiv.classList.add("zeroSign")
+                    }
+                    currentPlayer = 1 - currentPlayer
+                    playerTurn()
+                }
+            })
         }
 
-        zeroSignTurn()
     }
     return{
         startGameBtn,
         choosePlayer,
-        addGameField,
-        
     }
 }
-
-
-function zeroSignTurn(){
-    const getNewDiv = document.querySelectorAll(".gameSection [gameCell]")
-
-    getNewDiv.forEach(div =>{
-        div.addEventListener("click",() =>{
-            div.classList.add("zeroSign")
-            div.value = 0
-        })
-    })
-}
-
 
 
 function gameInitializer(){
@@ -131,9 +125,10 @@ function gameInitializer(){
 
     return {
         playTheGame,
-
     }
 }
+
+
 
 
 const gameInit = gameInitializer();
