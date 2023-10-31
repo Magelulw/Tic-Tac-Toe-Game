@@ -1,11 +1,12 @@
 function gameModule(){
 
     let currentPlayer = 0;
+    const gameSection = document.querySelector(".gameSection")
+
 
     function startGameBtn(){
         const startGameBtn = document.querySelector(".startGameBtn")
         const selectSection = document.querySelector(".selectSection")
-        const gameSection = document.querySelector(".gameSection")
         const playerText = document.querySelector(".playerText")
 
     
@@ -73,23 +74,17 @@ function gameModule(){
 
     }
 
-    function playerTurn() {
-        const playerText = document.querySelector(".playerText");
-
-        if (currentPlayer === 0) {
-            playerText.textContent = "Player 1's turn";
-        } else if (currentPlayer === 1) {
-            playerText.textContent = "Player 2's turn";
-        }
-    }
 
 
     function addGameField(){
         const gameFieldSection = document.querySelector(".gameSection");
+        const playerText = document.querySelector(".playerText");
+        playerText.textContent = "X begins"
 
     
-        for(let i = 1; i <= 9; i++){
+        for(let i = 0; i <= 8; i++){
             let newDiv = document.createElement("div")
+            newDiv.value = i
             newDiv.setAttribute("gameCell",i)
             newDiv.classList.add("CellSize")
             gameFieldSection.appendChild(newDiv)
@@ -97,20 +92,70 @@ function gameModule(){
             newDiv.addEventListener("click",() =>{
                 if(!newDiv.classList.contains("zerosSign") && !newDiv.classList.contains("plusSign")){
                     if(currentPlayer === 0){
-                        newDiv.classList.add("crossSign")
+                        newDiv.classList.add("crossSign");
+                        playerText.textContent = "O's turn";
+                        console.log(newDiv.value)
+                        
                     }else if(currentPlayer === 1){
                         newDiv.classList.add("zeroSign")
+                        playerText.textContent = "X's turn";
+                        console.log(newDiv.value)
+
                     }
                     currentPlayer = 1 - currentPlayer
-                    playerTurn()
+                    declareWinner()
                 }
             })
         }
 
     }
+
+
+    function declareWinner(){
+        const winner = document.querySelector(".winner")
+
+        const winConditions = [
+			[0, 1, 2],
+			[3, 4, 5],
+			[6, 7, 8],
+			[0, 3, 6],
+			[1, 4, 7],
+			[2, 5, 8],
+			[0, 4, 8],
+			[2, 4, 6],
+        ]
+
+        const cells = document.querySelectorAll(".CellSize")
+
+        for(const conditions of winConditions){
+            const [a, b, c] = conditions;
+        
+
+        if( 
+            cells[a].classList.contains("crossSign") &&
+            cells[b].classList.contains("crossSign") &&
+            cells[c].classList.contains("crossSign")
+          )
+          {
+                gameSection.classList.add("hidden")
+                winner.textContent = "Cross Sign player wins!"
+                return;
+            }
+            else if(
+                cells[a].classList.contains("zeroSign") &&
+                cells[b].classList.contains("zeroSign") &&
+                cells[c].classList.contains("zeroSign")
+            ){
+                gameSection.classList.add("hidden")
+                winner.textContent = "zero Sign player wins!"
+                return;
+            }
+        }
+
+    }
     return{
         startGameBtn,
-        choosePlayer,
+        choosePlayer
     }
 }
 
