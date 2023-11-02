@@ -110,10 +110,29 @@ function gameModule(){
 
     }
 
+    function playerScore(){
+        const playerText = document.querySelector(".playerText")
+
+
+        let player1Score = 0;
+        let player2Score = 0;
+
+        if(player1Score == 5){
+            playerText.textContent = "you have won the game"
+            return;
+        }
+
+        declareWinner(player1Score,player2Score)
+    }
+
 
     function declareWinner(){
-        const winner = document.querySelector(".winner")
+        let player1Score = 0;
+        let player2Score = 0;
 
+        const playerText = document.querySelector(".playerText")
+        
+        
         const winConditions = [
 			[0, 1, 2],
 			[3, 4, 5],
@@ -137,8 +156,15 @@ function gameModule(){
             cells[c].classList.contains("crossSign")
           )
           {
-                gameSection.classList.add("hidden")
-                winner.textContent = "Cross Sign player wins!"
+
+                player1Score++
+                playerText.textContent = `Player1: ${player1Score}  Player2: ${player2Score}`
+
+                cells.forEach(cell =>{
+                    cell.classList.remove("crossSign");
+                    cell.classList.remove("zeroSign")
+                })
+
                 return;
             }
             else if(
@@ -146,8 +172,13 @@ function gameModule(){
                 cells[b].classList.contains("zeroSign") &&
                 cells[c].classList.contains("zeroSign")
             ){
-                gameSection.classList.add("hidden")
-                winner.textContent = "zero Sign player wins!"
+
+                player2Score++
+                playerText.textContent = `Player1: ${player1Score}  Player2: ${player2Score}`
+                cells.forEach(cell =>{
+                    cell.classList.remove("crossSign");
+                    cell.classList.remove("zeroSign")
+                })
                 return;
             }
         }
@@ -155,7 +186,9 @@ function gameModule(){
     }
     return{
         startGameBtn,
-        choosePlayer
+        choosePlayer,
+        declareWinner,
+
     }
 }
 
