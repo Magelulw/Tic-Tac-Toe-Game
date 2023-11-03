@@ -3,6 +3,23 @@ function gameModule(){
     let currentPlayer = 0;
     const gameSection = document.querySelector(".gameSection")
 
+    let player1Score = 0;
+    let player2Score = 0;
+
+    const gameBoardSize = 8 
+
+
+    const winConditions = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6],
+    ]
+
 
     function startGameBtn(){
         const startGameBtn = document.querySelector(".startGameBtn")
@@ -15,58 +32,55 @@ function gameModule(){
             gameSection.classList.remove("hidden")
             playerText.classList.remove("hidden")
 
-            addGameField()
+            setupGameBoard()
         })
     }
 
-    function choosePlayer(){
+    function handlePlayerSelection(){
+        const playerTypes = {
+            human:"human",
+            bot: "bot",
+        }
+
         let player1 = "";
         let player2 = "";
 
+        const choosePlayerBtn = document.querySelectorAll(".buttonHover");
 
-
-        const choosePlayerBtn = document.querySelectorAll(".buttonHover")
-
-        const playerHuman1Choice = document.getElementById("human1")
-        const playerHuman2Choice = document.getElementById("human2")
-        const playerBot1Choice = document.getElementById("bot1")
-        const playerBot2Choice = document.getElementById("bot2")
+        const playerChoices = {
+            human1: document.getElementById("human1"),
+            bot1: document.getElementById("bot1"),
+            human2: document.getElementById("human2"),
+            bot2: document.getElementById("bot2"),
+        };
 
         choosePlayerBtn.forEach(btn =>{
             btn.addEventListener("click",function(){
                 let value = btn.value
 
-                switch(value) {
+                switch (value) {
                     case "human1":
-                        player1 = "human"
-                        playerHuman1Choice.classList.add("selectedChoiceBtn")
-                        playerBot1Choice.classList.remove("selectedChoiceBtn")
-                        
-
+                        player1 = playerTypes.human;
+                        playerChoices.human1.classList.add("selectedChoiceBtn");
+                        playerChoices.bot1.classList.remove("selectedChoiceBtn");
                         break;
-
                     case "bot1":
-                        player1 = "bot"
-                        playerBot1Choice.classList.add("selectedChoiceBtn")
-                        playerHuman1Choice.classList.remove("selectedChoiceBtn")
-                        
-
+                        player1 = playerTypes.bot;
+                        playerChoices.bot1.classList.add("selectedChoiceBtn");
+                        playerChoices.human1.classList.remove("selectedChoiceBtn");
                         break;
-                        
                     case "human2":
-                        player2 = "human"
-                        playerHuman2Choice.classList.add("selectedChoiceBtn")
-                        playerBot2Choice.classList.remove("selectedChoiceBtn")
-    
-                        break;        
-
+                        player2 = playerTypes.human;
+                        playerChoices.human2.classList.add("selectedChoiceBtn");
+                        playerChoices.bot2.classList.remove("selectedChoiceBtn");
+                        break;
                     case "bot2":
-                        player2 = "bot"
-                        playerBot2Choice.classList.add("selectedChoiceBtn")
-                        playerHuman2Choice.classList.remove("selectedChoiceBtn")
-
-                        default:
-                            return "there is something wrong"
+                        player2 = playerTypes.bot;
+                        playerChoices.bot2.classList.add("selectedChoiceBtn");
+                        playerChoices.human2.classList.remove("selectedChoiceBtn");
+                        break;
+                    default:
+                        console.error("Invalid player selection");
                 }
             })
             
@@ -74,15 +88,15 @@ function gameModule(){
 
     }
 
+    
 
-
-    function addGameField(){
+    function setupGameBoard(){
         const gameFieldSection = document.querySelector(".gameSection");
         const playerText = document.querySelector(".playerText");
         playerText.textContent = "X begins"
 
     
-        for(let i = 0; i <= 8; i++){
+        for(let i = 0; i <= gameBoardSize; i++){
             let newDiv = document.createElement("div")
             newDiv.value = i
             newDiv.setAttribute("gameCell",i)
@@ -90,60 +104,33 @@ function gameModule(){
             gameFieldSection.appendChild(newDiv)
 
             newDiv.addEventListener("click",() =>{
-                if(!newDiv.classList.contains("zerosSign") && !newDiv.classList.contains("plusSign")){
-                    if(currentPlayer === 0){
-                        newDiv.classList.add("crossSign");
-                        playerText.textContent = "O's turn";
-                        console.log(newDiv.value)
-                        
-                    }else if(currentPlayer === 1){
-                        newDiv.classList.add("zeroSign")
-                        playerText.textContent = "X's turn";
-                        console.log(newDiv.value)
-
-                    }
-                    currentPlayer = 1 - currentPlayer
-                    declareWinner()
-                }
-            })
+            handleClick(newDiv, playerText)
+        })
         }
 
     }
 
-    function playerScore(){
-        const playerText = document.querySelector(".playerText")
+    function handleClick(cell, playerText){
+        if(!cell.classList.contains("zerosSign") && !cell.classList.contains("plusSign")){
+            if(currentPlayer === 0){
+                cell.classList.add("crossSign");
+                playerText.textContent = "O's turn";
+                console.log(cell.value)
+                
+            }else if(currentPlayer === 1){
+                cell.classList.add("zeroSign")
+                playerText.textContent = "X's turn";
+                console.log(cell.value)
 
-
-        let player1Score = 0;
-        let player2Score = 0;
-
-        if(player1Score == 5){
-            playerText.textContent = "you have won the game"
-            return;
+            }
+            currentPlayer = 1 - currentPlayer
+            declareWinner()
         }
-
-        declareWinner(player1Score,player2Score)
     }
 
 
     function declareWinner(){
-        let player1Score = 0;
-        let player2Score = 0;
-
         const playerText = document.querySelector(".playerText")
-        
-        
-        const winConditions = [
-			[0, 1, 2],
-			[3, 4, 5],
-			[6, 7, 8],
-			[0, 3, 6],
-			[1, 4, 7],
-			[2, 5, 8],
-			[0, 4, 8],
-			[2, 4, 6],
-        ]
-
         const cells = document.querySelectorAll(".CellSize")
 
         for(const conditions of winConditions){
@@ -183,10 +170,32 @@ function gameModule(){
             }
         }
 
+        finalWinner()
+
     }
+
+
+
+
+    
+    function finalWinner(){
+
+        if(player1Score === 2){
+            console.log(`You won player1`)
+            return;
+        }
+        else if(player2Score === 2){
+            console.log(`You won player2`)
+            return;
+        }
+    }
+
+
+
+
     return{
         startGameBtn,
-        choosePlayer,
+        handlePlayerSelection,
         declareWinner,
 
     }
@@ -198,7 +207,7 @@ function gameInitializer(){
     
     function playTheGame(){
         game.startGameBtn()
-        game.choosePlayer()
+        game.handlePlayerSelection()
     }
 
     return {
