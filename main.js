@@ -1,8 +1,10 @@
 function gameModule(){
+    const gameSection = document.querySelector(".gameSection")
+    const gameFieldSection = document.querySelector(".gameSection");
+    const playerText = document.querySelector(".playerText")
+
 
     let currentPlayer = 0;
-    const gameSection = document.querySelector(".gameSection")
-
     let player1Score = 0;
     let player2Score = 0;
 
@@ -24,7 +26,7 @@ function gameModule(){
     function startGameBtn(){
         const startGameBtn = document.querySelector(".startGameBtn")
         const selectSection = document.querySelector(".selectSection")
-        const playerText = document.querySelector(".playerText")
+       
 
     
         startGameBtn.addEventListener("click", function(){
@@ -36,6 +38,7 @@ function gameModule(){
         })
     }
 
+       
     function handlePlayerSelection(){
         const playerTypes = {
             human:"human",
@@ -88,11 +91,21 @@ function gameModule(){
 
     }
 
+    function getUserName(){
+        const player1NameInput = document.querySelector(".player1Name");
+        const player2NameInput = document.querySelector(".player2Name");
+
+
+        let player1Name = player1Name.value
+        let player2Name = player2Name.value
+
+        declareWinner(player1Name,player2Name)
+    }
+
+
     
 
     function setupGameBoard(){
-        const gameFieldSection = document.querySelector(".gameSection");
-        const playerText = document.querySelector(".playerText");
         playerText.textContent = "X begins"
 
     
@@ -109,28 +122,34 @@ function gameModule(){
         }
 
     }
+ 
 
     function handleClick(cell, playerText){
-        if(!cell.classList.contains("zerosSign") && !cell.classList.contains("plusSign")){
-            if(currentPlayer === 0){
+        if (cell.classList.contains("zeroSign") || cell.classList.contains("crossSign")) {
+            return;
+        }
+    
+        if (currentPlayer === 0) {
+            if (!cell.classList.contains("zeroSign") && !cell.classList.contains("crossSign")) {
                 cell.classList.add("crossSign");
                 playerText.textContent = "O's turn";
-                console.log(cell.value)
-                
-            }else if(currentPlayer === 1){
-                cell.classList.add("zeroSign")
-                playerText.textContent = "X's turn";
-                console.log(cell.value)
-
+                currentPlayer = 1;
+                console.log(cell.value);
             }
-            currentPlayer = 1 - currentPlayer
-            declareWinner()
+        } else if (currentPlayer === 1) {
+            if (!cell.classList.contains("zeroSign") && !cell.classList.contains("crossSign")) {
+                cell.classList.add("zeroSign");
+                playerText.textContent = "X's turn";
+                currentPlayer = 0;
+                console.log(cell.value);
+            }
         }
+        declareWinner()
     }
 
 
-    function declareWinner(){
-        const playerText = document.querySelector(".playerText")
+    function declareWinner(player1Name,player2Name){
+       
         const cells = document.querySelectorAll(".CellSize")
 
         for(const conditions of winConditions){
@@ -145,7 +164,7 @@ function gameModule(){
           {
 
                 player1Score++
-                playerText.textContent = `Player1: ${player1Score}  Player2: ${player2Score}`
+                playerText.textContent = `${player1Name}: ${player1Score}  Player2: ${player2Score}`
 
                 cells.forEach(cell =>{
                     cell.classList.remove("crossSign");
@@ -161,7 +180,7 @@ function gameModule(){
             ){
 
                 player2Score++
-                playerText.textContent = `Player1: ${player1Score}  Player2: ${player2Score}`
+                playerText.textContent = `${player2Name}: ${player1Score}  Player2: ${player2Score}`
                 cells.forEach(cell =>{
                     cell.classList.remove("crossSign");
                     cell.classList.remove("zeroSign")
@@ -171,7 +190,6 @@ function gameModule(){
         }
 
         finalWinner()
-
     }
 
 
@@ -180,16 +198,22 @@ function gameModule(){
     
     function finalWinner(){
 
-        if(player1Score === 2){
-            console.log(`You won player1`)
+        if(player1Score === 1){
+            showModal()
             return;
         }
-        else if(player2Score === 2){
-            console.log(`You won player2`)
+        else if(player2Score === 1){
+            showModal()
             return;
         }
     }
 
+    function showModal(){
+
+        gameFieldSection.classList.add("hidden")
+
+        playerText.textContent = ""
+    }
 
 
 

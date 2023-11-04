@@ -19,8 +19,11 @@
     
             
             <div class="player1Div">
-    
-                <h3 class="player1Heading centerDiv">Player 1:</h3>
+                <div class="bottomSpace">
+                    <h3 class="player1Heading centerDiv">Player 1:</h3>
+                    <input class="playerInputName player1Name" type="text" placeholder="type your username">
+                </div>
+
             
                 <div class="centerBtn">
                     <button id="human1" class="player1Btn buttonHover " value="human1">Human</button>
@@ -32,8 +35,11 @@
     
     
             <div class="player2Div centerDiv">
-    
-                <h3 class="player2Heading">Player 2:</h3>
+                <div class="bottomSpace">
+                    <h3 class="player2Heading">Player 2:</h3>
+                    <input type="text" class="playerInputName player2Name" placeholder="type your username">
+                </div>
+
     
                 <div class="centerBtn">
                     <button id="human2" class="player2Btn buttonHover" value="human2">Human</button>
@@ -68,10 +74,15 @@
 
     </section>
 
-    <section>
-        <h1 class="winner">
-            
-        </h1>
+    <section class="winnerSection">
+        <div class="winnerModal hidden">
+            <h1 class="winnerText">
+                You have won!
+            </h1>
+
+            <button>Play again!</button>
+            <button>choose other mode</button>
+        </div>
     </section>
 
 
