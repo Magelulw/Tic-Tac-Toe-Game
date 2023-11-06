@@ -23,90 +23,34 @@ function gameModule(){
     ]
 
 
-    function startGameBtn(){
-        const startGameBtn = document.querySelector(".startGameBtn")
-        const selectSection = document.querySelector(".selectSection")
+    
+    function startGameBtn() {
+        const startGameBtn = document.querySelector(".startGameBtn");
+        const selectSection = document.querySelector(".selectSection");
+    
+        startGameBtn.addEventListener("click", function() {
+            selectSection.classList.add("hidden");
+            gameSection.classList.remove("hidden");
+            playerText.classList.remove("hidden");
+    
+            const player1Name = document.querySelector("#player1Name").value;
+            const player2Name = document.querySelector("#player2Name").value;
+    
+            setupGameBoard(player1Name, player2Name); // Pass the names to setupGameBoard
+        });
+    }
+
        
 
-    
-        startGameBtn.addEventListener("click", function(){
-            selectSection.classList.add("hidden")
-            gameSection.classList.remove("hidden")
-            playerText.classList.remove("hidden")
-
-            setupGameBoard()
-        })
-    }
-
-       
-    function handlePlayerSelection(){
-        const playerTypes = {
-            human:"human",
-            bot: "bot",
-        }
-
-        let player1 = "";
-        let player2 = "";
-
-        const choosePlayerBtn = document.querySelectorAll(".buttonHover");
-
-        const playerChoices = {
-            human1: document.getElementById("human1"),
-            bot1: document.getElementById("bot1"),
-            human2: document.getElementById("human2"),
-            bot2: document.getElementById("bot2"),
-        };
-
-        choosePlayerBtn.forEach(btn =>{
-            btn.addEventListener("click",function(){
-                let value = btn.value
-
-                switch (value) {
-                    case "human1":
-                        player1 = playerTypes.human;
-                        playerChoices.human1.classList.add("selectedChoiceBtn");
-                        playerChoices.bot1.classList.remove("selectedChoiceBtn");
-                        break;
-                    case "bot1":
-                        player1 = playerTypes.bot;
-                        playerChoices.bot1.classList.add("selectedChoiceBtn");
-                        playerChoices.human1.classList.remove("selectedChoiceBtn");
-                        break;
-                    case "human2":
-                        player2 = playerTypes.human;
-                        playerChoices.human2.classList.add("selectedChoiceBtn");
-                        playerChoices.bot2.classList.remove("selectedChoiceBtn");
-                        break;
-                    case "bot2":
-                        player2 = playerTypes.bot;
-                        playerChoices.bot2.classList.add("selectedChoiceBtn");
-                        playerChoices.human2.classList.remove("selectedChoiceBtn");
-                        break;
-                    default:
-                        console.error("Invalid player selection");
-                }
-            })
-            
-        })
-
-    }
-
-    function getUserName(){
-        const player1NameInput = document.querySelector(".player1Name");
-        const player2NameInput = document.querySelector(".player2Name");
 
 
-        let player1Name = player1Name.value
-        let player2Name = player2Name.value
+//===========================
+//  creates the gameBoard
+//      through div's
+//===========================
 
-        declareWinner(player1Name,player2Name)
-    }
-
-
-    
-
-    function setupGameBoard(){
-        playerText.textContent = "X begins"
+    function setupGameBoard(player1Name,player2Name){
+        playerText.textContent = `${player1Name} begins`;
 
     
         for(let i = 0; i <= gameBoardSize; i++){
@@ -122,7 +66,11 @@ function gameModule(){
         }
 
     }
- 
+
+//======================================================
+//checks if the clicked field already contains a  sign 
+//======================================================
+
 
     function handleClick(cell, playerText){
         if (cell.classList.contains("zeroSign") || cell.classList.contains("crossSign")) {
@@ -148,6 +96,24 @@ function gameModule(){
     }
 
 
+    function getUserName(){
+        const player1Name = document.querySelector("#player1Name").value;
+        const player2Name = document.querySelector("#player2Name").value;
+    
+        console.log(player1Name)
+        console.log(player2Name)
+
+        declareWinner(player1Name,player2Name)
+    }
+
+
+
+//===============================
+//declares the winner of the round
+//looks for three sign in a row
+//===============================
+
+
     function declareWinner(player1Name,player2Name){
        
         const cells = document.querySelectorAll(".CellSize")
@@ -162,16 +128,15 @@ function gameModule(){
             cells[c].classList.contains("crossSign")
           )
           {
-
-                player1Score++
-                playerText.textContent = `${player1Name}: ${player1Score}  Player2: ${player2Score}`
-
-                cells.forEach(cell =>{
-                    cell.classList.remove("crossSign");
-                    cell.classList.remove("zeroSign")
-                })
-
-                return;
+            player1Score++
+            playerText.textContent = `${player1Name}: ${player1Score}  Player2: ${player2Score}`
+    
+            cells.forEach(cell =>{
+                cell.classList.remove("crossSign");
+                cell.classList.remove("zeroSign")
+            })
+            
+            return;
             }
             else if(
                 cells[a].classList.contains("zeroSign") &&
@@ -194,15 +159,18 @@ function gameModule(){
 
 
 
+//==========================
+//declares the final Winner
+//==========================
 
     
     function finalWinner(){
 
-        if(player1Score === 1){
+        if(player1Score === 3){
             showModal()
             return;
         }
-        else if(player2Score === 1){
+        else if(player2Score === 3){
             showModal()
             return;
         }
@@ -219,7 +187,7 @@ function gameModule(){
 
     return{
         startGameBtn,
-        handlePlayerSelection,
+        getUserName,
         declareWinner,
 
     }
@@ -231,7 +199,8 @@ function gameInitializer(){
     
     function playTheGame(){
         game.startGameBtn()
-        game.handlePlayerSelection()
+        game.getUserName()
+        // game.handlePlayerSelection()
     }
 
     return {
@@ -244,3 +213,60 @@ function gameInitializer(){
 
 const gameInit = gameInitializer();
 gameInit.playTheGame();
+
+
+
+
+
+
+// function handlePlayerSelection(){
+//     const playerTypes = {
+//         human:"human",
+//         bot: "bot",
+//     }
+
+//     let player1 = "";
+//     let player2 = "";
+
+//     const choosePlayerBtn = document.querySelectorAll(".buttonHover");
+
+//     const playerChoices = {
+//         human1: document.getElementById("human1"),
+//         bot1: document.getElementById("bot1"),
+//         human2: document.getElementById("human2"),
+//         bot2: document.getElementById("bot2"),
+//     };
+
+//     choosePlayerBtn.forEach(btn =>{
+//         btn.addEventListener("click",function(){
+//             let value = btn.value
+
+//             switch (value) {
+//                 case "human1":
+//                     player1 = playerTypes.human;
+//                     playerChoices.human1.classList.add("selectedChoiceBtn");
+//                     playerChoices.bot1.classList.remove("selectedChoiceBtn");
+//                     break;
+//                 case "bot1":
+//                     player1 = playerTypes.bot;
+//                     playerChoices.bot1.classList.add("selectedChoiceBtn");
+//                     playerChoices.human1.classList.remove("selectedChoiceBtn");
+//                     break;
+//                 case "human2":
+//                     player2 = playerTypes.human;
+//                     playerChoices.human2.classList.add("selectedChoiceBtn");
+//                     playerChoices.bot2.classList.remove("selectedChoiceBtn");
+//                     break;
+//                 case "bot2":
+//                     player2 = playerTypes.bot;
+//                     playerChoices.bot2.classList.add("selectedChoiceBtn");
+//                     playerChoices.human2.classList.remove("selectedChoiceBtn");
+//                     break;
+//                 default:
+//                     console.error("Invalid player selection");
+//             }
+//         })
+        
+//     })
+
+// }

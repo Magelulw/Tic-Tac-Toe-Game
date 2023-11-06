@@ -21,7 +21,7 @@
             <div class="player1Div">
                 <div class="bottomSpace">
                     <h3 class="player1Heading centerDiv">Player 1:</h3>
-                    <input class="playerInputName player1Name" type="text" placeholder="type your username">
+                    <input class="playerInputName" id="player1Name" type="text" placeholder="type your username">
                 </div>
 
             
@@ -37,7 +37,7 @@
             <div class="player2Div centerDiv">
                 <div class="bottomSpace">
                     <h3 class="player2Heading">Player 2:</h3>
-                    <input type="text" class="playerInputName player2Name" placeholder="type your username">
+                    <input type="text" class="playerInputName" id="player2Name" placeholder="type your username">
                 </div>
 
     
@@ -56,7 +56,7 @@
         
         <div class="startTheGameSection">
     
-            <button class="startGameBtn">Start</button>
+            <button type="button" class="startGameBtn" onclick="getUserName()" >Start</button>
             
         </div>
     </section>
